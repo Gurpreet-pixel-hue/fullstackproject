@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MoonMitti</title>
+  <style>
+    @font-face {
+      font-family: 'MyCustomFont';
+      src: url('Wonder Mermaid.otf') format('truetype');
+    }
+
+    /* Global & Reset */
+    body, html {
+      margin: 0; padding: 0;
+      font-family: 'MyCustomFont', Georgia, 'Times New Roman', Times, serif;
+      scroll-behavior: smooth;
+      color: #333;
+      background: #fff;
+      min-height: 100vh;
+    }
+
+    /* === PAGE 1 LANDING === */
+    #landing {
+      height: 100vh;
+      background: linear-gradient(270deg, #ffdee9, #b5fffc, #ffdee9);
+      background-size: 600% 600%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      color: darkslategray;
+      user-select: none;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      font-size: 7rem;
+      font-weight: bold;
+      position: relative;
+      display: inline-block;
+    }
+
+    .moon-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .moon {
+      position: absolute;
+      font-size: 9.5rem;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(-55%);
+      color: rgba(255, 255, 224, 0.8);
+      text-shadow: 0 0 20px #fffacd, 0 0 40px #fffacd, 0 0 60px #fffae5, 0 0 80px #fff9c4;
+      z-index: -1;
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+      user-select: none;
+    }
+    .moon:hover {
+      transform: translateX(-50%) translateY(-55%) scale(1.2);
+      text-shadow: 0 0 30px #fffacd, 0 0 60px #fffacd, 0 0 90px #fffae5, 0 0 120px #fff9c4;
+    }
+
+    .tagline {
+      font-size: 2.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .go-ahead-btn {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(255, 255, 255, 0.85);
+      border: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .go-ahead-btn:hover {
+      background-color: rgba(255, 255, 255, 1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+      animation: whoosh 0.6s forwards;
+    }
+    @keyframes whoosh {
+      0% { transform: translateX(-50%) translateX(0); }
+      50% { transform: translateX(-50%) translateX(25px); }
+      100% { transform: translateX(-50%) translateX(10px); }
+    }
+
+    /* === PAGE 2 MAIN CONTENT === */
+    #fixedHeader {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #c7ddff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 15px 0;
+      text-align: center;
+      z-index: 1000;
+      user-select: none;
+    }
+    #fixedHeader h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1e3a8a;
+    }
+    #fixedHeader p {
+      margin: 5px 0 0;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #355c7d;
+    }
+
+    main#mainContent {
+      margin: 0 auto;
+      max-width: 1000px;
+      background: #a8d0ff;
+      min-height: 100vh;
+      padding: 110px 30px 120px;
+      display: flex;
+      gap: 50px;
+      box-sizing: border-box;
+      color: #1a2e6e;
+    }
+
+    /* Left about us */
+    #about {
+      background: #e6f0ff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      font-size: 1rem;
+      line-height: 1.5;
+      overflow: hidden;
+      position: relative;
+    }
+    #about p {
+      margin-top: 0.6rem;
+      white-space: pre-line;
+    }
+
+    /* See More button for About */
+    #about .see-more-btn {
+      margin-top: auto;
+      align-self: flex-start;
+      background: transparent;
+      border: none;
+      color: #355c7d;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0;
+      text-decoration: underline;
+      user-select: none;
+    }
+
+    /* Collapsed text for About */
+    #about .collapsed {
+      max-height: 140px;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    #about .expanded {
+      max-height: 1000px; /* large enough */
+      transition: max-height 0.5s ease;
+    }
+
+    /* Right family tabs */
+    #family {
+      background: #e6f0ff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      flex: 1.1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #family h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #1e3a8a;
+      user-select: none;
+    }
+
+    .tabs {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .tab-buttons {
+      display: flex;
+      border-bottom: 2px solid #9bb9ff;
+      margin-bottom: 15px;
+    }
+
+    .tab-buttons button {
+      background: transparent;
+      border: none;
+      padding: 10px 18px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #4b6cb7;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.3s, color 0.3s;
+      font-size: 1rem;
+      user-select: none;
+    }
+
+    .tab-buttons button.active {
+      border-color: #355c7d;
+      color: #1e3a8a;
+    }
+
+    .tab-content {
+      flex-grow: 1;
+      background: #dbe9ff;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #1a2e6e;
+      min-height: 180px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+      overflow: hidden;
+      position: relative;
+      display: none;
+      flex-direction: column;
+    }
+    .tab-content.active {
+      display: flex;
+    }
+
+    .tab-content h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      user-select: none;
+    }
+    .tab-content p {
+      flex-grow: 1;
+      margin: 0 0 10px;
+      white-space: pre-line;
+    }
+
+    /* See More for each tab content */
+    .tab-content .see-more-btn {
+      background: transparent;
+      border: none;
+      color: #355c7d;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+      padding: 0;
+      align-self: flex-start;
+      text-decoration: underline;
+      user-select: none;
+    }
+    .tab-content .collapsed {
+      max-height: 80px;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    .tab-content .expanded {
+      max-height: 1000px;
+      transition: max-height 0.5s ease;
+    }
+
+    /* Contact Us Section */
+    #contact {
+      max-width: 1000px;
+      margin: 40px auto 60px;
+      background: #c7ddff;
+      border-radius: 12px;
+      padding: 25px 40px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+      color: #1e3a8a;
+      font-size: 1rem;
+      user-select: none;
+    }
+    #contact h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+    #contact p {
+      margin: 6px 0;
+      line-height: 1.4;
+    }
+    #contact a {
+      color: #355c7d;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 900px) {
+      main#mainContent {
+        flex-direction: column;
+        padding: 120px 20px 120px;
+      }
+      #about, #family {
+        flex: none;
+        width: 100%;
+      }
+      #contact {
+        margin: 30px 15px 50px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- PAGE 1: Landing -->
+  <section id="landing" aria-label="Landing Page">
+    <div class="container" aria-label="Company Logo and Name">
+      MoonMitt<span class="moon-container" aria-hidden="true">i<div class="moon">🌙</div></span>
+      <div class="tagline" aria-label="Tagline">From Moonlit Dreams To Mitti's Embrace</div>
+    </div>
+    <button class="go-ahead-btn" aria-label="Go to main content">Go Ahead</button>
+  </section>
+
+  <!-- PAGE 2: Main Content -->
+  <header id="fixedHeader" aria-label="Site header">
+    <h1>MoonMitti</h1>
+    <p>From Moonlit Dreams To Mitti's Embrace</p>
+  </header>
+
+  <main id="mainContent" aria-label="Main content">
+    <section id="about" aria-labelledby="aboutTitle">
+      <h2 id="aboutTitle">About Us</h2>
+      <p class="collapsed">
+MoonMitti: Calming, Culturally-Rich Learning for Every Child
+
+MoonMitti is a gentle, value-based early childhood brand focused on creating calming, culturally-rich learning experiences for children aged 0 to 7/8 years.
+It is an entertainment and storytelling platform that stands apart from overstimulating, fast-paced content like Cocomelon.
+Instead, MoonMitti uses slow pacing, soft visuals, and soothing narration to craft personalized stories that reflect each child's unique identity
+and teach them life values in a simple, loving way. The idea is to create content that is screen-friendly yet mindful,
+adaptable for special children too—so all the beautiful kids out there can benefit. Beyond digital content, MoonMitti brings back the warmth of tradition through sensory-rich, screen-free activity kits and audio tales in regional Indian languages—just like stories a Nani would tell. These kits aim to build emotional intelligence, creativity, and strong parent-child bonds. The brand also envisions introducing regional language learning (Hindi, Sindhi, Urdu, etc.) from a young age, giving kids a beautiful connection with their roots while supporting underrepresented languages that need revival.
+
+To bring this alive, we’ll collaborate with freelance animators, filmmakers, AI voice artists, and child development experts. Animators can be anyone who does meaningful work—whether they are independent creators or part of a larger filmmaking community. MoonMitti will also hold mentor and filmmaker meetups, nurturing a network of passionate creatives across India. This will not only ensure diverse content but also generate employment for artists, educators, and voice talents.
+
+What makes MoonMitti powerful isn’t just the content—it’s the movement. It’s about redefining early learning and entertainment with heart. Our biggest challenge isn’t making the content, it’s reaching concerned parents who don’t yet know what they’re missing. That’s why our focus will be on Instagram-first storytelling, emotional brand content, and building trust through parenting groups, preschools, and word-of-mouth. MoonMitti is not just a platform—it’s a calm, rooted, and meaningful revolution in how we raise our children.
+      </p>
+      <button class="see-more-btn" aria-expanded="false" aria-controls="aboutText">See More</button>
+    </section>
+
+    <section id="family" aria-labelledby="familyTitle">
+      <h2 id="familyTitle">Know Our Family</h2>
+      <div class="tabs" role="tablist" aria-label="Know Our Family Tabs">
+        <div class="tab-buttons">
+          <button role="tab" aria-selected="true" aria-controls="tab1" id="tab1-btn" class="active" data-tab="tab1">Founders</button>
+          <button role="tab" aria-selected="false" aria-controls="tab2" id="tab2-btn" data-tab="tab2">Team</button>
+          <button role="tab" aria-selected="false" aria-controls="tab3" id="tab3-btn" data-tab="tab3">Partners</button>
+          <button role="tab" aria-selected="false" aria-controls="tab4" id="tab4-btn" data-tab="tab4">Characters</button>
+        </div>
+        <div id="tab1" class="tab-content active" role="tabpanel" aria-labelledby="tab1-btn">
+          <h3>Founders</h3>
+          <p class="collapsed">
+Our visionary founder started this company with a mission to innovate and inspire. Dedicated to nurturing creativity and learning, they drive our core values and vision.
+          </p>
+          <button class="see-more-btn" aria-expanded="false" aria-controls="foundersText">See More</button>
+        </div>
+        <div id="tab2" class="tab-content" role="tabpanel" aria-labelledby="tab2-btn" tabindex="0">
+          <h3>Team</h3>
+          <p class="collapsed">
+Our team consists of passionate professionals dedicated to excellence, innovation, and collaboration. Together, we build the foundation for our future.
+          </p>
+          <button class="see-more-btn" aria-expanded="false" aria-controls="teamText">See More</button>
+        </div>
+        <div id="tab3" class="tab-content" role="tabpanel" aria-labelledby="tab3-btn" tabindex="0">
+          <h3>Partners</h3>
+          <p class="collapsed">
+We collaborate with trusted partners who share our mission to expand our impact worldwide and enrich the experiences we provide.
+          </p>
+          <button class="see-more-btn" aria-expanded="false" aria-controls="partnersText">See More</button>
+        </div>
+        <div id="tab4" class="tab-content" role="tabpanel" aria-labelledby="tab4-btn" tabindex="0">
+          <h3>Characters</h3>
+          <p class="collapsed">
+Our beloved characters bring stories to life, connecting children with values, culture, and imagination through engaging narratives.
+          </p>
+          <button class="see-more-btn" aria-expanded="false" aria-controls="charactersText">See More</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section id="contact" aria-label="Contact Us Section">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:contact@moonmitti.com">contact@moonmitti.com</a></p>
+    <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+    <p>Address: 123 MoonMitti Lane, Imagination City, Dreamland</p>
+  </section>
+
+  <script>
+    // Smooth scroll from Go Ahead button to main content
+    document.querySelector('.go-ahead-btn').addEventListener('click', () => {
+      document.getElementById('mainContent').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // About Us See More toggle
+    const aboutSection = document.querySelector('#about');
+    const aboutParagraph = aboutSection.querySelector('p');
+    const aboutBtn = aboutSection.querySelector('.see-more-btn');
+
+    aboutBtn.addEventListener('click', () => {
+      const expanded = aboutBtn.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        aboutParagraph.classList.remove('expanded');
+        aboutParagraph.classList.add('collapsed');
+        aboutBtn.textContent = 'See More';
+        aboutBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        aboutParagraph.classList.remove('collapsed');
+        aboutParagraph.classList.add('expanded');
+        aboutBtn.textContent = 'See Less';
+        aboutBtn.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    // Tabs logic
+    const tabButtons = document.querySelectorAll('.tab-buttons button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Deselect all tabs
+        tabButtons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+        // Hide all tab panels
+        tabContents.forEach(content => content.classList.remove('active'));
+
+        // Activate clicked tab
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+
+        // Show corresponding content
+        const tabId = button.getAttribute('data-tab');
+        const tabContent = document.getElementById(tabId);
+        tabContent.classList.add('active');
+
+        // Reset any see more in tab content to collapsed state on tab switch
+        const p = tabContent.querySelector('p');
+        const btn = tabContent.querySelector('.see-more-btn');
+        if (p && btn) {
+          p.classList.remove('expanded');
+          p.classList.add('collapsed');
+          btn.textContent = 'See More';
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // See More toggles inside each tab content
+    document.querySelectorAll('.tab-content .see-more-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const p = btn.previousElementSibling;
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+
+        if (expanded) {
+          p.classList.remove('expanded');
+          p.classList.add('collapsed');
+          btn.textContent = 'See More';
+          btn.setAttribute('aria-expanded', 'false');
+        } else {
+          p.classList.remove('collapsed');
+          p.classList.add('expanded');
+          btn.textContent = 'See Less';
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
