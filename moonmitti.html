@@ -10,35 +10,33 @@
       src: url('Wonder Mermaid.otf') format('truetype');
     }
 
-    /* Global & Reset */
     body, html {
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       font-family: 'MyCustomFont', Georgia, 'Times New Roman', Times, serif;
-      scroll-behavior: smooth;
-      color: #333;
-      background: #fff;
-      min-height: 100vh;
-    }
-
-    /* === PAGE 1 LANDING === */
-    #landing {
-      height: 100vh;
+      color: darkslategray;
       background: linear-gradient(270deg, #ffdee9, #b5fffc, #ffdee9);
       background-size: 600% 600%;
       animation: gradientBG 15s ease infinite;
+      min-height: 100vh;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    #landing {
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       position: relative;
-      color: darkslategray;
       user-select: none;
-    }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      color: darkslategray;
     }
 
     .container {
@@ -46,6 +44,7 @@
       font-weight: bold;
       position: relative;
       display: inline-block;
+      text-align: center;
     }
 
     .moon-container {
@@ -62,8 +61,8 @@
       color: rgba(255, 255, 224, 0.8);
       text-shadow: 0 0 20px #fffacd, 0 0 40px #fffacd, 0 0 60px #fffae5, 0 0 80px #fff9c4;
       z-index: -1;
-      transition: transform 0.3s ease, text-shadow 0.3s ease;
       user-select: none;
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
     }
     .moon:hover {
       transform: translateX(-50%) translateY(-55%) scale(1.2);
@@ -75,93 +74,68 @@
       margin-top: 0.5rem;
     }
 
-    .go-ahead-btn {
-      position: absolute;
-      bottom: 40px;
+    .rocket-button {
+      position: fixed;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background-color: rgba(255, 255, 255, 0.85);
-      border: none;
-      padding: 12px 30px;
-      border-radius: 30px;
-      font-size: 1.5rem;
-      font-weight: 600;
+      font-size: 3.5rem;
       cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
       user-select: none;
+      background: transparent;
+      border: none;
+      color: darkslategray;
+      filter: drop-shadow(0 0 2px #999);
+      transition: transform 0.3s ease;
     }
-
-    .go-ahead-btn:hover {
-      background-color: rgba(255, 255, 255, 1);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.35);
-      animation: whoosh 0.6s forwards;
-    }
-    @keyframes whoosh {
-      0% { transform: translateX(-50%) translateX(0); }
-      50% { transform: translateX(-50%) translateX(25px); }
-      100% { transform: translateX(-50%) translateX(10px); }
-    }
-
-    /* === PAGE 2 MAIN CONTENT === */
-    #fixedHeader {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      background: #c7ddff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      padding: 15px 0;
-      text-align: center;
-      z-index: 1000;
-      user-select: none;
-    }
-    #fixedHeader h1 {
-      margin: 0;
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1e3a8a;
-    }
-    #fixedHeader p {
-      margin: 5px 0 0;
-      font-size: 1.1rem;
-      font-style: italic;
+    .rocket-button:hover {
+      transform: translateX(-50%) translateY(-5px) scale(1.1);
       color: #355c7d;
     }
 
-    main#mainContent {
-      margin: 0 auto;
-      max-width: 1000px;
-      background: #a8d0ff;
-      min-height: 100vh;
-      padding: 110px 30px 120px;
+    #mainContent {
+      max-width: 1100px;
+      margin: 100px auto 60px;
       display: flex;
-      gap: 50px;
+      gap: 80px;
+      padding: 0 20px;
       box-sizing: border-box;
       color: #1a2e6e;
+      min-height: 500px;
     }
 
-    /* Left about us */
+    #leftColumn {
+      flex: 1.3;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
     #about {
-      background: #e6f0ff;
+      background: rgba(230, 240, 255, 0.75);
       border-radius: 12px;
       padding: 25px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      flex: 1.2;
-      display: flex;
-      flex-direction: column;
       font-size: 1rem;
       line-height: 1.5;
-      overflow: hidden;
+      user-select: none;
       position: relative;
     }
-    #about p {
-      margin-top: 0.6rem;
-      white-space: pre-line;
+    #about h2 {
+      margin-top: 0;
+      color: #1e3a8a;
     }
-
-    /* See More button for About */
+    #about p {
+      white-space: pre-line;
+      max-height: 140px;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      margin: 0;
+    }
+    #about p.expanded {
+      max-height: 1000px;
+    }
     #about .see-more-btn {
-      margin-top: auto;
-      align-self: flex-start;
       background: transparent;
       border: none;
       color: #355c7d;
@@ -169,52 +143,37 @@
       cursor: pointer;
       font-size: 1rem;
       padding: 0;
+      margin-top: 12px;
       text-decoration: underline;
       user-select: none;
+      display: inline-block;
     }
 
-    /* Collapsed text for About */
-    #about .collapsed {
-      max-height: 140px;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-    }
-    #about .expanded {
-      max-height: 1000px; /* large enough */
-      transition: max-height 0.5s ease;
-    }
-
-    /* Right family tabs */
-    #family {
-      background: #e6f0ff;
+    #familyTabs {
+      background: rgba(230, 240, 255, 0.75);
       border-radius: 12px;
-      padding: 25px;
+      padding: 20px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      flex: 1.1;
+      user-select: none;
       display: flex;
       flex-direction: column;
     }
-
-    #family h2 {
-      margin-top: 0;
-      margin-bottom: 15px;
+    #familyTabs h2 {
+      margin: 0 0 15px 0;
       color: #1e3a8a;
-      user-select: none;
     }
 
     .tabs {
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
     }
-
     .tab-buttons {
       display: flex;
       border-bottom: 2px solid #9bb9ff;
       margin-bottom: 15px;
     }
-
     .tab-buttons button {
+      flex: 1;
       background: transparent;
       border: none;
       padding: 10px 18px;
@@ -226,42 +185,42 @@
       font-size: 1rem;
       user-select: none;
     }
-
     .tab-buttons button.active {
       border-color: #355c7d;
       color: #1e3a8a;
     }
 
     .tab-content {
-      flex-grow: 1;
       background: #dbe9ff;
       padding: 15px;
       border-radius: 8px;
       font-size: 0.95rem;
       color: #1a2e6e;
-      min-height: 180px;
+      min-height: 140px;
       box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-      overflow: hidden;
-      position: relative;
       display: none;
       flex-direction: column;
+      user-select: text;
+      position: relative;
     }
     .tab-content.active {
       display: flex;
     }
-
     .tab-content h3 {
       margin-top: 0;
       margin-bottom: 8px;
-      user-select: none;
     }
     .tab-content p {
-      flex-grow: 1;
-      margin: 0 0 10px;
+      margin: 0;
       white-space: pre-line;
+      max-height: 100px;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      flex-grow: 1;
     }
-
-    /* See More for each tab content */
+    .tab-content p.expanded {
+      max-height: 1000px;
+    }
     .tab-content .see-more-btn {
       background: transparent;
       border: none;
@@ -270,226 +229,272 @@
       cursor: pointer;
       font-size: 0.95rem;
       padding: 0;
+      margin-top: 8px;
+      text-decoration: underline;
+      user-select: none;
       align-self: flex-start;
-      text-decoration: underline;
-      user-select: none;
-    }
-    .tab-content .collapsed {
-      max-height: 80px;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-    }
-    .tab-content .expanded {
-      max-height: 1000px;
-      transition: max-height 0.5s ease;
+      display: inline-block;
     }
 
-    /* Contact Us Section */
-    #contact {
-      max-width: 1000px;
-      margin: 40px auto 60px;
-      background: #c7ddff;
+    #rightColumn {
+      flex: 1;
+      background: rgba(230, 240, 255, 0.75);
       border-radius: 12px;
-      padding: 25px 40px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #rightColumn h2 {
+      margin: 0 0 10px 0;
       color: #1e3a8a;
-      font-size: 1rem;
       user-select: none;
     }
-    #contact h2 {
-      margin-top: 0;
-      margin-bottom: 15px;
+
+    .mini-tab-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-bottom: 10px;
     }
-    #contact p {
-      margin: 6px 0;
-      line-height: 1.4;
-    }
-    #contact a {
-      color: #355c7d;
-      text-decoration: underline;
+    .mini-tab-buttons button {
+      background: #355c7d;
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 4px 12px;
+      border-radius: 6px;
       cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+    .mini-tab-buttons button:disabled {
+      background: #9bb9ff;
+      cursor: default;
+    }
+    .mini-tab-buttons button:hover:not(:disabled) {
+      background: #1e3a8a;
     }
 
-    /* Responsive tweaks */
+    .mini-tab-content {
+      background: #dbe9ff;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+      font-size: 0.95rem;
+      color: #1a2e6e;
+      min-height: 140px;
+      user-select: text;
+    }
+    .mini-tab-content h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    .mini-tab-content p {
+      margin: 0;
+      white-space: pre-line;
+    }
+
     @media (max-width: 900px) {
-      main#mainContent {
+      #mainContent {
         flex-direction: column;
-        padding: 120px 20px 120px;
+        gap: 40px;
+        margin: 80px 10px 40px;
       }
-      #about, #family {
+      #leftColumn, #rightColumn {
         flex: none;
         width: 100%;
       }
-      #contact {
-        margin: 30px 15px 50px;
-        padding: 20px;
+      .tab-buttons button {
+        font-size: 0.9rem;
+        padding: 8px 10px;
+      }
+      .mini-tab-buttons button {
+        font-size: 1rem;
+        padding: 3px 10px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- PAGE 1: Landing -->
-  <section id="landing" aria-label="Landing Page">
+  <section id="landing" aria-label="Landing page">
     <div class="container" aria-label="Company Logo and Name">
       MoonMitt<span class="moon-container" aria-hidden="true">i<div class="moon">🌙</div></span>
       <div class="tagline" aria-label="Tagline">From Moonlit Dreams To Mitti's Embrace</div>
     </div>
-    <button class="go-ahead-btn" aria-label="Go to main content">Go Ahead</button>
+    <button class="rocket-button" aria-label="Scroll to main content">🚀</button>
   </section>
-
-  <!-- PAGE 2: Main Content -->
+  
   <header id="fixedHeader" aria-label="Site header">
     <h1>MoonMitti</h1>
     <p>From Moonlit Dreams To Mitti's Embrace</p>
   </header>
 
   <main id="mainContent" aria-label="Main content">
-    <section id="about" aria-labelledby="aboutTitle">
-      <h2 id="aboutTitle">About Us</h2>
-      <p class="collapsed">
-MoonMitti: Calming, Culturally-Rich Learning for Every Child
+    <div id="leftColumn">
+      <section id="about" aria-labelledby="aboutTitle">
+        <h2 id="aboutTitle">About Us</h2>
+        <p id="aboutText">
+          MoonMitti: Calming, Culturally-Rich Learning for Every Child
 
-MoonMitti is a gentle, value-based early childhood brand focused on creating calming, culturally-rich learning experiences for children aged 0 to 7/8 years.
-It is an entertainment and storytelling platform that stands apart from overstimulating, fast-paced content like Cocomelon.
-Instead, MoonMitti uses slow pacing, soft visuals, and soothing narration to craft personalized stories that reflect each child's unique identity
-and teach them life values in a simple, loving way. The idea is to create content that is screen-friendly yet mindful,
-adaptable for special children too—so all the beautiful kids out there can benefit. Beyond digital content, MoonMitti brings back the warmth of tradition through sensory-rich, screen-free activity kits and audio tales in regional Indian languages—just like stories a Nani would tell. These kits aim to build emotional intelligence, creativity, and strong parent-child bonds. The brand also envisions introducing regional language learning (Hindi, Sindhi, Urdu, etc.) from a young age, giving kids a beautiful connection with their roots while supporting underrepresented languages that need revival.
+          MoonMitti is a gentle, value-based early childhood brand focused on creating calming, culturally-rich learning experiences for children aged 0 to 7/8 years.
+          It is an entertainment and storytelling platform that stands apart from overstimulating, fast-paced content like Cocomelon.
+          Instead, MoonMitti uses slow pacing, soft visuals, and soothing narration to craft personalized stories that reflect each child's unique identity
+          and teach them life values in a simple, loving way. The idea is to create content that is screen-friendly yet mindful,
+          adaptable for special children too—so all the beautiful kids out there can benefit. Beyond digital content, MoonMitti brings back the warmth of tradition through sensory-rich, screen-free activity kits and audio tales in regional Indian languages—just like stories a Nani would tell. These kits aim to build emotional intelligence, creativity, and strong parent-child bonds. The brand also envisions introducing regional language learning (Hindi, Sindhi, Urdu, etc.) from a young age, giving kids a beautiful connection with their roots while supporting underrepresented languages that need revival.
 
-To bring this alive, we’ll collaborate with freelance animators, filmmakers, AI voice artists, and child development experts. Animators can be anyone who does meaningful work—whether they are independent creators or part of a larger filmmaking community. MoonMitti will also hold mentor and filmmaker meetups, nurturing a network of passionate creatives across India. This will not only ensure diverse content but also generate employment for artists, educators, and voice talents.
+          To bring this alive, we’ll collaborate with freelance animators, filmmakers, AI voice artists, and child development experts. Animators can be anyone who does meaningful work—whether they are independent creators or part of a larger filmmaking community. MoonMitti will also hold mentor and filmmaker meetups, nurturing a network of passionate creatives across India. This will not only ensure diverse content but also generate employment for artists, educators, and voice talents.
 
-What makes MoonMitti powerful isn’t just the content—it’s the movement. It’s about redefining early learning and entertainment with heart. Our biggest challenge isn’t making the content, it’s reaching concerned parents who don’t yet know what they’re missing. That’s why our focus will be on Instagram-first storytelling, emotional brand content, and building trust through parenting groups, preschools, and word-of-mouth. MoonMitti is not just a platform—it’s a calm, rooted, and meaningful revolution in how we raise our children.
-      </p>
-      <button class="see-more-btn" aria-expanded="false" aria-controls="aboutText">See More</button>
-    </section>
+          What makes MoonMitti powerful isn’t just the content—it’s the movement. It’s about redefining early learning and entertainment with heart. Our biggest challenge isn’t making the content, it’s reaching concerned parents who don’t yet know what they’re missing. That’s why our focus will be on Instagram-first storytelling, emotional brand content, and building trust through parenting groups, preschools, and word-of-mouth. MoonMitti is not just a platform—it’s a calm, rooted, and meaningful revolution in how we raise our children.
+        </p>
+        <button class="see-more-btn" aria-expanded="false" aria-controls="aboutText">See More</button>
+      </section>
 
-    <section id="family" aria-labelledby="familyTitle">
-      <h2 id="familyTitle">Know Our Family</h2>
-      <div class="tabs" role="tablist" aria-label="Know Our Family Tabs">
-        <div class="tab-buttons">
-          <button role="tab" aria-selected="true" aria-controls="tab1" id="tab1-btn" class="active" data-tab="tab1">Founders</button>
-          <button role="tab" aria-selected="false" aria-controls="tab2" id="tab2-btn" data-tab="tab2">Team</button>
-          <button role="tab" aria-selected="false" aria-controls="tab3" id="tab3-btn" data-tab="tab3">Partners</button>
-          <button role="tab" aria-selected="false" aria-controls="tab4" id="tab4-btn" data-tab="tab4">Characters</button>
+      <section id="familyTabs" aria-label="Founders, Team, and Partners tabs">
+        <h2>Know Our Family</h2>
+        <div class="tabs" role="tablist" aria-label="Family Tabs">
+          <div class="tab-buttons" role="tablist">
+            <button role="tab" aria-selected="true" aria-controls="foundersTab" id="foundersBtn" class="active" data-tab="foundersTab">Founders</button>
+            <button role="tab" aria-selected="false" aria-controls="teamTab" id="teamBtn" data-tab="teamTab">Team</button>
+            <button role="tab" aria-selected="false" aria-controls="partnersTab" id="partnersBtn" data-tab="partnersTab">Partners</button>
+          </div>
+
+          <div id="foundersTab" class="tab-content active" role="tabpanel" aria-labelledby="foundersBtn" tabindex="0">
+            <h3>Founders</h3>
+            <p id="foundersText">
+              Our visionary founder started this company with a mission to innovate and inspire. Dedicated to nurturing creativity and learning, they drive our core values and vision.
+            </p>
+            <button class="see-more-btn" aria-expanded="false" aria-controls="foundersText">See More</button>
+          </div>
+          <div id="teamTab" class="tab-content" role="tabpanel" aria-labelledby="teamBtn" tabindex="0">
+            <h3>Team</h3>
+            <p id="teamText">
+              Our team consists of passionate professionals dedicated to excellence, innovation, and collaboration. Together, we build the foundation for our future.
+            </p>
+            <button class="see-more-btn" aria-expanded="false" aria-controls="teamText">See More</button>
+          </div>
+          <div id="partnersTab" class="tab-content" role="tabpanel" aria-labelledby="partnersBtn" tabindex="0">
+            <h3>Partners</h3>
+            <p id="partnersText">
+              We collaborate with trusted partners who share our mission to expand our impact worldwide and enrich the experiences we provide.
+            </p>
+            <button class="see-more-btn" aria-expanded="false" aria-controls="partnersText">See More</button>
+          </div>
         </div>
-        <div id="tab1" class="tab-content active" role="tabpanel" aria-labelledby="tab1-btn">
-          <h3>Founders</h3>
-          <p class="collapsed">
-Our visionary founder started this company with a mission to innovate and inspire. Dedicated to nurturing creativity and learning, they drive our core values and vision.
-          </p>
-          <button class="see-more-btn" aria-expanded="false" aria-controls="foundersText">See More</button>
-        </div>
-        <div id="tab2" class="tab-content" role="tabpanel" aria-labelledby="tab2-btn" tabindex="0">
-          <h3>Team</h3>
-          <p class="collapsed">
-Our team consists of passionate professionals dedicated to excellence, innovation, and collaboration. Together, we build the foundation for our future.
-          </p>
-          <button class="see-more-btn" aria-expanded="false" aria-controls="teamText">See More</button>
-        </div>
-        <div id="tab3" class="tab-content" role="tabpanel" aria-labelledby="tab3-btn" tabindex="0">
-          <h3>Partners</h3>
-          <p class="collapsed">
-We collaborate with trusted partners who share our mission to expand our impact worldwide and enrich the experiences we provide.
-          </p>
-          <button class="see-more-btn" aria-expanded="false" aria-controls="partnersText">See More</button>
-        </div>
-        <div id="tab4" class="tab-content" role="tabpanel" aria-labelledby="tab4-btn" tabindex="0">
-          <h3>Characters</h3>
-          <p class="collapsed">
-Our beloved characters bring stories to life, connecting children with values, culture, and imagination through engaging narratives.
-          </p>
-          <button class="see-more-btn" aria-expanded="false" aria-controls="charactersText">See More</button>
-        </div>
+      </section>
+    </div>
+
+    <div id="rightColumn" aria-label="Characters section">
+      <h2>Characters</h2>
+      <div class="mini-tab-buttons" aria-label="Characters navigation buttons">
+        <button id="prevCharBtn" aria-label="Previous character" disabled>&lt;</button>
+        <button id="nextCharBtn" aria-label="Next character">&gt;</button>
       </div>
-    </section>
+      <div id="charactersContent" class="mini-tab-content" tabindex="0" aria-live="polite" aria-atomic="true">
+      </div>
+    </div>
   </main>
 
-  <section id="contact" aria-label="Contact Us Section">
-    <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:contact@moonmitti.com">contact@moonmitti.com</a></p>
-    <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
-    <p>Address: 123 MoonMitti Lane, Imagination City, Dreamland</p>
-  </section>
-
   <script>
-    // Smooth scroll from Go Ahead button to main content
-    document.querySelector('.go-ahead-btn').addEventListener('click', () => {
+    document.querySelector('.rocket-button').addEventListener('click', () => {
       document.getElementById('mainContent').scrollIntoView({ behavior: 'smooth' });
     });
 
-    // About Us See More toggle
-    const aboutSection = document.querySelector('#about');
-    const aboutParagraph = aboutSection.querySelector('p');
-    const aboutBtn = aboutSection.querySelector('.see-more-btn');
-
-    aboutBtn.addEventListener('click', () => {
-      const expanded = aboutBtn.getAttribute('aria-expanded') === 'true';
-      if (expanded) {
-        aboutParagraph.classList.remove('expanded');
-        aboutParagraph.classList.add('collapsed');
-        aboutBtn.textContent = 'See More';
-        aboutBtn.setAttribute('aria-expanded', 'false');
-      } else {
-        aboutParagraph.classList.remove('collapsed');
-        aboutParagraph.classList.add('expanded');
-        aboutBtn.textContent = 'See Less';
-        aboutBtn.setAttribute('aria-expanded', 'true');
-      }
-    });
-
-    // Tabs logic
-    const tabButtons = document.querySelectorAll('.tab-buttons button');
-    const tabContents = document.querySelectorAll('.tab-content');
+    const tabButtons = document.querySelectorAll('#familyTabs .tab-buttons button');
+    const tabContents = document.querySelectorAll('#familyTabs .tab-content');
 
     tabButtons.forEach(button => {
       button.addEventListener('click', () => {
-        // Deselect all tabs
         tabButtons.forEach(btn => {
           btn.classList.remove('active');
           btn.setAttribute('aria-selected', 'false');
         });
-        // Hide all tab panels
-        tabContents.forEach(content => content.classList.remove('active'));
 
-        // Activate clicked tab
+        tabContents.forEach(content => {
+          content.classList.remove('active');
+          const p = content.querySelector('p');
+          if (p) {
+            p.classList.remove('expanded');
+            buttonsForP = content.querySelectorAll('.see-more-btn');
+            buttonsForP.forEach(b => {
+              b.textContent = 'See More';
+              b.setAttribute('aria-expanded', 'false');
+            });
+          }
+        });
+
         button.classList.add('active');
         button.setAttribute('aria-selected', 'true');
 
-        // Show corresponding content
         const tabId = button.getAttribute('data-tab');
         const tabContent = document.getElementById(tabId);
         tabContent.classList.add('active');
-
-        // Reset any see more in tab content to collapsed state on tab switch
-        const p = tabContent.querySelector('p');
-        const btn = tabContent.querySelector('.see-more-btn');
-        if (p && btn) {
-          p.classList.remove('expanded');
-          p.classList.add('collapsed');
-          btn.textContent = 'See More';
-          btn.setAttribute('aria-expanded', 'false');
-        }
+        tabContent.querySelector('p').focus();
       });
     });
 
-    // See More toggles inside each tab content
-    document.querySelectorAll('.tab-content .see-more-btn').forEach(btn => {
+    document.querySelectorAll('.see-more-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const p = btn.previousElementSibling;
+        const p = document.getElementById(btn.getAttribute('aria-controls'));
         const expanded = btn.getAttribute('aria-expanded') === 'true';
-
         if (expanded) {
           p.classList.remove('expanded');
-          p.classList.add('collapsed');
           btn.textContent = 'See More';
           btn.setAttribute('aria-expanded', 'false');
         } else {
-          p.classList.remove('collapsed');
           p.classList.add('expanded');
           btn.textContent = 'See Less';
           btn.setAttribute('aria-expanded', 'true');
         }
       });
     });
+
+    const characters = [
+      {
+        name: 'Character 1',
+        description: 'Our beloved character 1 brings stories to life, connecting children with values, culture, and imagination through engaging narratives.'
+      },
+      {
+        name: 'Character 2',
+        description: 'Character 2 is known for inspiring creativity and nurturing emotional intelligence among our young audience.'
+      },
+      {
+        name: 'Character 3',
+        description: 'Character 3 represents the joy of learning and the warmth of tradition, loved by children and parents alike.'
+      }
+    ];
+
+    let currentCharIndex = 0;
+
+    const charactersContent = document.getElementById('charactersContent');
+    const prevCharBtn = document.getElementById('prevCharBtn');
+    const nextCharBtn = document.getElementById('nextCharBtn');
+
+    function updateCharacterContent() {
+      const char = characters[currentCharIndex];
+      charactersContent.innerHTML = <h3>${char.name}</h3><p>${char.description}</p>;
+      prevCharBtn.disabled = currentCharIndex === 0;
+      nextCharBtn.disabled = currentCharIndex === characters.length - 1;
+    }
+
+    prevCharBtn.addEventListener('click', () => {
+      if (currentCharIndex > 0) {
+        currentCharIndex--;
+        updateCharacterContent();
+      }
+    });
+
+    nextCharBtn.addEventListener('click', () => {
+      if (currentCharIndex < characters.length - 1) {
+        currentCharIndex++;
+        updateCharacterContent();
+      }
+    });
+
+    updateCharacterContent();
   </script>
 </body>
 </html>
