@@ -271,12 +271,9 @@ main {
     </div>
 
     <button class="down-button" id="moveLogo">🚀</button>
-     <!-- Site Page Content hidden initially -->
+     >
   <div id="sitePage" aria-hidden="true">
-    <!--<header>
-      <h1>suhaane sapne</h1>
-      <p class="tagline">Building the future with hustle?</p>
-    </header>-->
+    
 
     <main>
       <div class="left-column">
@@ -331,7 +328,7 @@ main {
         </section>
       </div>
     </main>
-
+     <button class="down-button" id="openThirdPage">🚀</button>
     <section id="contact">
       <h3>Contact Us</h3>
       <p>For inquiries, collaborations, or just to say hello, reach out to us!</p>
@@ -363,17 +360,18 @@ main {
 
 
 <script>
-    // Move logo to top-right when button clicked
-    document.getElementById('moveLogo').addEventListener('click', function() {
-        document.getElementById('logo').classList.add('top-right');
-    });
+  // Move logo to top-right when button clicked
+  document.getElementById('moveLogo').addEventListener('click', function() {
+    document.getElementById('logo').classList.add('top-right');
+  });
 
-    // Remove rainbow after animation
-    setTimeout(() => {
-        const arc = document.querySelector('.rainbow-arc');
-        if (arc) arc.remove();
-    }, 3100);
-    function toggleText(id, btn) {
+  // Remove rainbow after animation
+  setTimeout(() => {
+    const arc = document.querySelector('.rainbow-arc');
+    if (arc) arc.remove();
+  }, 3100);
+
+  function toggleText(id, btn) {
     const content = document.getElementById(id);
     const isVisible = content.style.display === 'block';
     content.style.display = isVisible ? 'none' : 'block';
@@ -429,6 +427,12 @@ main {
       site.setAttribute('aria-hidden', 'false');
     }, 1000);
   });
+
+  // ✅ FIXED: Add this outside of other functions
+  document.getElementById('openThirdPage').addEventListener('click', function () {
+    window.location.href = 'mmfourthpage.html'; // Update this path if needed
+  });
 </script>
+
 </body>  
 </html>
