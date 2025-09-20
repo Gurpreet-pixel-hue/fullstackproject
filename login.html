@@ -85,16 +85,34 @@
 
 <div class="login-box">
     <div class="moon">🌙</div>
-    <h2>Login</h2>
+    <h2>MoonMitti</h2>
     <input type="text" id="username" placeholder="Username" />
     <input type="password" id="password" placeholder="Password" />
     <button id="loginBtn">Login</button>
 </div>
+<div class="Otp" style="visibility: hidden;">
+    <input id = "pass" type = number placeholder="Enter OTP"/>
+    <button id = "go">Verify</button> 
+</div>
 
 <script>
+    function generateOTP() {
+        return Math.floor(100000 + Math.random() * 900000).toString();
+    }
+    let pass = generateOTP();
+    console.log("Generated OTP:", pass); // For demonstration purposes only
     document.getElementById("loginBtn").addEventListener("click", function() {
-        // For now: just open another page
-        window.location.href = "moonmitti.html"; 
+        document.getElementsByClassName("login-box")[0].style.display = "none";
+        document.getElementsByClassName("Otp")[0].style.visibility = "visible";
+    });
+    document.getElementById("go").addEventListener("click",function(){
+        let check = document.getElementById("pass").value;
+        if(check == pass){
+            window.location.href = "moonmitti.html";
+        }
+        else{
+            alert("Invalid otp");
+        }
     });
 </script>
 

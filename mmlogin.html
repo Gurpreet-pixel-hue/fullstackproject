@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MoonMitti Signup</title>
+<style>
+  @font-face {
+    font-family: 'MyCustomFont';
+    src: url('Wonder Mermaid.otf') format('truetype');
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(270deg, #ffdee9, #b5fffc, #ffdee9);
+    background-size: 600% 600%;
+    animation: gradientBG 15s ease infinite;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Logo at top-right */
+  #logo {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-family: 'MyCustomFont', Georgia, 'Times New Roman', Times, serif;
+    font-size: 3rem;
+    font-weight: bold;
+    color: darkslategray;
+    text-align: right;
+    cursor: default;
+    z-index: 1000;
+  }
+  #logo .moon-container {
+    display: inline-block;
+    position: relative;
+  }
+  #logo .moon {
+    position: absolute;
+    font-size: 2.5rem;
+    top: 0;
+    left: 50%;
+    transform: translateX(-69%) translateY(-45%);
+    color: rgba(255, 255, 224, 0.8);
+    text-shadow: 0 0 30px #fffacd, 0 0 60px #fffacd, 0 0 90px #fffae5, 0 0 120px #fff9c4;
+    pointer-events: none;
+  }
+
+  /* Signup form container */
+  .signup-container {
+    background: rgba(230, 240, 255, 0.9);
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    width: 360px;
+    box-sizing: border-box;
+    height: 300px;
+  }
+
+  .signup-container h2 {
+    margin: 0 0 25px;
+    font-weight: 700;
+    color: #1e3a8a;
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #355c7d;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    border: 1.5px solid #9bb9ff;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+  }
+  input:focus, select:focus {
+    border-color: #4b6cb7;
+    outline: none;
+  }
+
+  button {
+    width: 100%;
+    background-color: #4b6cb7;
+    color: white;
+    font-weight: 700;
+    padding: 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #355c7d;
+  }
+
+  /* Hide all steps except active */
+  .step {
+    display: none;
+  }
+  .step.active {
+    display: block;
+  }
+
+  /* Navigation buttons container */
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav-buttons button {
+    width: 48%;
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- Logo at top-right -->
+  <div id="logo">
+    MoonMitt<span class="moon-container">i<div class="moon">🌙</div></span>
+  </div>
+
+  <!-- Multi-step signup form -->
+  <div class="signup-container" role="main" aria-label="Signup Form">
+    <h2>Create an Account</h2>
+
+    <form id="signupForm" novalidate>
+      <!-- Step 1: Email -->
+      <div class="email" id="step1">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="email" />
+        <div class="nav-buttons">
+          <button type="button" id="next1">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Phone Number -->
+      <div class="phone" id="step2" style = "display:none;">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" required autocomplete="tel" pattern="[0-9+ -]{7,15}" placeholder="+91 98765 43210" />
+        <div class="nav-buttons">
+          <button type="button" id="prev2">Previous</button>
+          <button type="button" id="next2">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Region -->
+      <div class="region" id="step3"  style = "display:none;">
+        <label for="region">Region</label>
+        <select id="region" name="region" required>
+          <option value="" disabled selected>Select your region</option>
+          <option value="north">North India</option>
+          <option value="south">South India</option>
+          <option value="east">East India</option>
+          <option value="west">West India</option>
+          <option value="central">Central India</option>
+          <option value="other">Other</option>
+        </select>
+        <div class="nav-buttons">
+          <button type="button" id="prev3">Previous</button>
+          <button type="button" id="next3">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Preferred Language -->
+      <div class="lang" id="step4"  style = "display:none;">
+        <label for="language">Preferred Language</label>
+        <select id="language" name="language" required>
+          <option value="" disabled selected>Select preferred language</option>
+          <option value="hindi">Hindi</option>
+          <option value="english">English</option>
+          <option value="marathi">Marathi</option>
+          <option value="tamil">Tamil</option>
+          <option value="telugu">Telugu</option>
+          <option value="bengali">Bengali</option>
+          <option value="other">Other</option>
+        </select>
+        <div class="nav-buttons">
+          <button type="button" id="prev4">Previous</button>
+          <button type="button" id="next4">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Username and Password -->
+      <div class="user" id="step5"  style = "display:none;">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required autocomplete="username" />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required autocomplete="new-password" />
+        <div class="nav-buttons">
+          <button type="button" id="prev5">Previous</button>
+          <button type="submit" id="submitBtn">Create Account</button>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+
+<script>
+    //email container
+  document.getElementById("next1").addEventListener("click", function(){
+    document.getElementById("step1").style.display = "none";
+    document.getElementById("step2").style.display = "block";
+    
+    console.log("Email is: ",document.getElementById("email").value);
+  });
+  document.getElementById("prev2").addEventListener("click", function(){
+    document.getElementById("step1").style.display = "block";
+    document.getElementById("step2").style.display = "none";
+
+  });
+  //phone
+  document.getElementById("next2").addEventListener("click", function(){
+    document.getElementById("step2").style.display = "none";
+    document.getElementById("step3").style.display = "block";
+    console.log("Phone is: ",document.getElementById("phone").value);
+
+  });
+  document.getElementById("prev3").addEventListener("click", function(){
+    document.getElementById("step2").style.display = "block";
+    document.getElementById("step3").style.display = "none";
+
+  });
+  //region
+  document.getElementById("next3").addEventListener("click", function(){
+    document.getElementById("step3").style.display = "none";
+    document.getElementById("step4").style.display = "block";
+    console.log("Region is: ",document.getElementById("region").value);
+
+  });
+  document.getElementById("prev4").addEventListener("click", function(){
+    document.getElementById("step3").style.display = "block";
+    document.getElementById("step4").style.display = "none";
+
+  });
+  //language
+  document.getElementById("next4").addEventListener("click", function(){
+    document.getElementById("step4").style.display = "none";
+    document.getElementsByClassName("signup-container")[0].style.height = "350px";
+    document.getElementById("step5").style.display = "block";
+    console.log("Language is: ",document.getElementById("language").value);
+
+  });
+  document.getElementById("prev5").addEventListener("click", function(){
+    document.getElementById("step4").style.display = "block";
+    document.getElementsByClassName("signup-container")[0].style.height = "300px";
+    document.getElementById("step5").style.display = "none";
+
+  });
+  //user pass
+  document.getElementById("submitBtn").addEventListener("click", function(){
+    console.log("Username is: ",document.getElementById("username").value," Password is: ",document.getElementById("password".value))
+    alert("Account Created Succefully!");
+  });
+</script>
+
+</body>
+</html>
